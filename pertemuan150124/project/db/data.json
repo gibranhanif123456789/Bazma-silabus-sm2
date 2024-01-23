@@ -1,0 +1,94 @@
+[
+  {
+    "id": "NIHISZWQKS",
+    "merek": "12",
+    "model": "12",
+    "chipset": "12",
+    "baterai": "12",
+    "ram": "12",
+    "rom": "12",
+    "kamera": "12",
+    "resolusi": "12",
+    "sistemoprasi": "12"
+  },
+  {
+    "id": "QEEPCHFFMW",
+    "merek": "redmi",
+    "model": "note 12",
+    "chipset": "g99",
+    "baterai": "5000",
+    "ram": "8",
+    "rom": "128",
+    "kamera": "50 mp",
+    "resolusi": "1200",
+    "sistemoprasi": "iOS"
+  },
+  {
+    "id": "XNDNHZOQMC",
+    "merek": "asda",
+    "model": "sd",
+    "chipset": "asd",
+    "baterai": "asd",
+    "ram": "4",
+    "rom": "asd",
+    "kamera": "asd",
+    "resolusi": "asd",
+    "sistemoprasi": "asd"
+  },
+  {
+    "id": "XFMILZAICS",
+    "merek": "dsa",
+    "model": "dasd",
+    "chipset": "f",
+    "baterai": "123",
+    "ram": "321",
+    "rom": "122",
+    "kamera": "211",
+    "resolusi": "2",
+    "sistemoprasi": ""
+  },
+  {
+    "id": "FHXGBFKFTA",
+    "merek": "asd",
+    "model": "asd",
+    "chipset": "asd",
+    "baterai": "a",
+    "ram": "",
+    "rom": "",
+    "kamera": "sad",
+    "resolusi": "",
+    "sistemoprasi": "asd"
+  },
+  {
+    "id": "GUHEIAFVFU",
+    "merek": "sad",
+    "model": "sad",
+    "chipset": "asd",
+    "baterai": "as mAh",
+    "ram": "d GB",
+    "rom": "asd GB",
+    "kamera": "asd MP",
+    "resolusi": "asda Pixel",
+    "sistemoprasi": "sdas"
+  },
+  {
+    "id": "ZFEAOFRTIL",
+    "baterai": "undefined mAh",
+    "ram": "undefined GB",
+    "rom": "undefined GB",
+    "kamera": "undefined MP",
+    "resolusi": "undefined Pixel"
+  },
+  {
+    "id": "EZKUKFGETH",
+    "merek": "EZKUKFGETH",
+    "model": "123",
+    "chipset": "123",
+    "baterai": "123",
+    "ram": "123",
+    "rom": "12423",
+    "kamera": "445",
+    "resolusi": "2523",
+    "sistemoprasi": "123"
+  }
+]
