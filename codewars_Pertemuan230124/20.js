@@ -1,5 +1,4 @@
 function topSecret(str){
-    //coding here...
     var arrSplit = str.split(" ");
     var arrLet = [];
     
