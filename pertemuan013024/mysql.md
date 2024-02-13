@@ -140,6 +140,9 @@ where condition in(s)
 select * from 
 
 
+pertama kita akan membuat table perpustakaan ketik di terminal kode berikut
+membuat table perpustakaan
+
 create table perpustakan(
     -> id int primary key auto_increment not null,
     -> judul varchar(400),
@@ -153,6 +156,28 @@ create table perpustakan(
     -> isbn int,
     -> harga int);      
 
+kemudian kita menginput data yang akan kita masukan dalam table, keitkan kode berikut di terminal;
+UPDATE nama_tabel SET harga = 15000 WHERE batas_umur BETWEEN 10 AND 15;
+menginput data
+insert into perpustakan (judul, kategori, deskripsi, penulis, penerbit, tahun_terbit, jumlah_halaman,batas_umur,isbn,harga)values("belajar aja dulu","codng","Belajar coding","maman","ngodingmulu",2019,2022,45,123,22000);
 
 
+1. tugas 1 memfilter berdasarkan tahun terbit
+2. Cari data dengan (like) = judul, kategori, penulis
+kenapa muncul semua karena kategorinya semua sama makanya muncul semua, yang kedua kenapa cuma muncul satu karna kita make nama penulis dan judulnya aja 
+3. Data id Desc
+mengurutkan berdasarkan id yang paling besar atau data yang paling baru di tambahkan;
+4. Filtering jumlah halaman >= & < & = (bebas)
+karna kita menggunakan and jadi lebih spesifik dan hanya 1 data yang memenuhi kategori;
+5. Tahun terbit >= 2020 =< 2026
+muncul 5 data karna pada buku ke 6 itu tahun rilisnya tidak memenuhi kategori
+6. Batas Umur dimulai dari 8 s/d 20
+muncul 2 data karna sisanya tidak memiliki kategori atau umurnya lebih dari 20
+7. Harga dimulai dari desc / asc
+mengurutkan berdasarkan harga yang paling murah atau yang terkecil
+8. Harga range dari bebas - bebas (1  - 100000000)
+yang keluar hanya 3 data karna harga nya kurang diantara 20000 dan di bawah 30000
+9. Harus ada update delete
+ada 2 yang terupdate data harganya dana ada 2 yang terhapus datanya karna tidak memenuhi syarat;
 
+cukup sekian wasalamualaikum;
