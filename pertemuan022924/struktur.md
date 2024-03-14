@@ -1,0 +1,21 @@
+-Menginstal npm init -y👌
+-Selanjutnya dalah ubah main package json dair index.js menjadi app.js👌
+-Buat file app.js👌
+-BUat folder db/connections.js👌
+-menginstall npm i express body-parser mysql12 cors👌
+-Menginstal npm i -g nodemon /nodemon --save -dev👌
+-Buat file dengan nama .gitignore👌
+-Buat database baru dengan nama smk_bazma_todo👌
+-Konfigurasi db/connection.js ke mysql👌
+-konfigurasi app.js👌
+-Buat Table todo ; id, title, description()👌
+    id int primary key auto_increment,👌
+    -> title varchar(255) not null, 👌
+    -> description text;👌
+-jalankan nodemon 
+-konfigurasi membaca file todo rest api()
+-Menjalankan menagmbil todos menggunakan thunder client
+-Konfigurasi menambahkan data todo rest api
+-Menajlankan menambakan data baru todo rest api menggunakan thunder clients
+---setting headers = accept = aplication/json
+  
