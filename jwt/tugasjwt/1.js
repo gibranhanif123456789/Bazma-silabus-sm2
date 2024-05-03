@@ -1,14 +1,10 @@
 const jwt = require('jsonwebtoken');
 const secretKey = 'liburlebaran';
 
-
-
 function createToken(data) {
-   
-    const token = jwt.sign(data, secretKey, { expiresIn: '72h' }); 
+    const token = jwt.sign(data, secretKey, {expiresIn: '1h'}); 
     return token;
 }
-
 
 function verify(token) {
     try {
@@ -25,21 +21,21 @@ const peserta = [
         id: 1,
         fullName: 'Jamal',
         destinasi: 'Pulau Dewata (Bali)',
-        address: ' Jakarta',
+        address: 'Jakarta',
         contact: '0810'
     },
     {
         id: 2,
         fullName: 'Udin',
         destinasi: 'Kepulauan',
-        address: ' Jaktim.',
+        address: 'Jaktim',
         contact: '082'
     },
     {
         id: 3,
         fullName: 'Lala',
         destinasi: 'Gunung Api',
-        address: 'Bogor.',
+        address: 'Bogor',
         contact: '034'
     },
     {
@@ -61,11 +57,8 @@ const peserta = [
 const arrToken = [];
 const arrLiburan = [];
 
-
 peserta.forEach(peserta => {
-    const token = createToken(
-        peserta.id, peserta.fullName, peserta.address, peserta.contact
-    )
+    const token = createToken(peserta); // Menggunakan objek peserta sebagai argumen
     arrToken.push(token);
 })
 
@@ -73,15 +66,13 @@ arrToken.forEach((token, index) => {
     console.log(`Peserta dengan id ${index + 1} menggunakan token: ${token} \n`);
 })
 
-
 arrToken.forEach((token, index) => {
     const decodedPeserta = verify(token);
     console.log('decodedPeserta: ', decodedPeserta);
 })
 
-
-liburan.forEach(liburan => {
-    const token = createToken(liburan)
+peserta.forEach(peserta => { // Menggunakan peserta untuk iterasi, bukan liburan
+    const token = createToken(peserta);
     arrLiburan.push(token);
 })
 
