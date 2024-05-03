@@ -3,9 +3,9 @@ const secretKey = 'liburlebaran';
 
 
 
-function createTokenLiburan(data) {
+function createToken(data) {
    
-    const token = jwt.sign(data, secretKey, { expiresIn: '168h' }); // Bertahan 1 Minggu
+    const token = jwt.sign(data, secretKey, { expiresIn: '72h' }); 
     return token;
 }
 
@@ -24,62 +24,39 @@ const peserta = [
     {
         id: 1,
         fullName: 'Jamal',
+        destinasi: 'Pulau Dewata (Bali)',
         address: ' Jakarta',
         contact: '0810'
     },
     {
         id: 2,
         fullName: 'Udin',
+        destinasi: 'Kepulauan',
         address: ' Jaktim.',
         contact: '082'
     },
     {
         id: 3,
         fullName: 'Lala',
+        destinasi: 'Gunung Api',
         address: 'Bogor.',
         contact: '034'
     },
     {
         id: 4,
         fullName: 'KKa',
+        destinasi: 'Tegal',
         address: 'sulsel',
         contact: '0856'
     },
     {
         id: 5,
         fullName: 'BMW',
+        destinasi: 'Solo',
         address: 'jawa',
         contact: '0878'
     }
 ]
-
-const liburan = [
-    {
-      destinasi: 'Pulau Dewata (Bali)', // Updated destinasi
-      waktu: '4 hari', // Updated waktu
-      paket: 'Premium' // Updated paket
-    },
-    {
-      destinasi: 'Taman Mini Indonesia Indah (TMII)', // Updated destinasi
-      waktu: '3 hari', // Updated waktu
-      paket: 'VIP' // Updated paket
-    },
-    {
-      destinasi: 'Gunung Bromo', // Updated destinasi
-      waktu: '2 hari', // Updated waktu
-      paket: 'Ekonomi' // Updated paket
-    },
-    {
-      destinasi: 'Pantai Kuta', // Updated destinasi
-      waktu: '5 hari', // Updated waktu
-      paket: 'Bisnis' // Updated paket
-    },
-    {
-      destinasi: 'Candi Borobudur', // Updated destinasi
-      waktu: '6 hari', // Updated waktu
-      paket: 'Premium' // Updated paket
-    }
-  ];
 
 const arrToken = [];
 const arrLiburan = [];
@@ -104,7 +81,7 @@ arrToken.forEach((token, index) => {
 
 
 liburan.forEach(liburan => {
-    const token = createTokenLiburan(liburan)
+    const token = createToken(liburan)
     arrLiburan.push(token);
 })
 
