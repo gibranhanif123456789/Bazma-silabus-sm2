@@ -1,55 +1,116 @@
-const connection = require('../config/connection');
+const connection = require('../Config/Connection')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-async function registerUser(name, email, password, phone){
-    try{
-        const [existingUser] = await connection.query('SELECT * FROM user WHERE email = ?', [email]);
-            if(existingUser.length>0){
-                throw new Error('Email alredy exist')
-            }
-            // hash password biar ga bisa di baca
-            const hasheadPassword = await bcrypt.hash(password,16);
-            // bikin usser baru
-            const [newUser] = await connection.query('INSERT INTO user (name, email, password) VALUES (?, ?, ?)', [name, email, hasheadPassword]);
-            return {success:true,message : 'user created succesfully', data :{ id: newUser.insertId, name, email, phone } };
-        }catch (error){
-            throw new Error(error)
-        }
+// register
+
+async function registerUser(name, email, password, phone) {
+  try {
+    // cek apakah email ini sudah terdaftar / belum?
+    const [existingEmailUser] = await connection.query('select * from user where email =?', [email]);
+    if (existingEmailUser.length > 0) throw new Error('Email already exists');
+    // cek apakah password yang dimasukkan benar?
+    const hashedPassword = await bcrypt.hash(password, 16);
+    // kalau tidak ada maka kita boleh buat email tersebut.
+    const [newUser] = await connection.query(
+      'insert into user (name, email, password, phone) values (?, ? , ? , ?)', [name, email, hashedPassword, phone]);
+
+    const [createdUser] = await connection.query('SELECT * FROM user WHERE id = ?', [newUser.insertId]);
+
+    return {
+      success: true,
+      message: 'User has been created',
+      data: createdUser[0]
     }
-    async function loginUser(email, password) {
-        try {
-          const [user] = await connection.query('SELECT * FROM user WHERE email = ?', [email]);
-          if (user.length === 0) {
-            throw new Error('User not found');
-          }
-          const isPasswordValid = await bcrypt.compare(password, user[0].password);
-          if (!isPasswordValid) {
-            throw new Error('Invalid password');
-          }
-          // generate token
-          const createToken = jwt.sign({ email: user[0].email, password: user[0].password }, 'bazmaSecretKey');
-          return { success: true, message: 'Login successful', createToken };
-        } catch (error) {
-          console.error(error);
-          return { success: false, message: error.message };
-        }
+  }
+  catch (error) {
+    throw new Error(error);
+  }
+}
+
+
+// login
+
+async function loginUser(email, password) {
+  try {
+    // Cek apakah email ini sudah terdaftar atau belum
+    const [existingEmailUser] = await connection.query('SELECT * FROM user WHERE email = ?', [email]);
+    if (existingEmailUser.length === 0) {
+      throw new Error('Email does not exist');
+    }
+
+    const user = existingEmailUser[0];
+
+    // Periksa apakah password yang dimasukkan benar
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new Error('Invalid email or password');
+    }
+
+    // Jika email dan password cocok, buat token JWT
+    const token = jwt.sign({ id: user.id }, 'bazmaSecretKey', {
+      expiresIn: '7h'
+    });
+
+    // Kembalikan informasi user dan token
+    // await connection.query('UPDATE user SET token = ? WHERE id = ?', [token, user.id]);
+
+    return {
+      success: true,
+      message: 'User has been logged in',
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone
+      },
+      token
+    };
+  } catch (error) {
+    console.error(error);
+    throw new Error('Login failed');
+  }
+}
+
+// get me dengan jwt
+
+async function getMe(token) {
+  try {
+    const decoded = jwt.verify(token, 'bazmaSecretKey');
+    const [checkUser] = await connection.query('select * from user where id =?', [decoded.id]);
+
+    const user = checkUser[0];
+    return {
+      success: true,
+      message: 'User data fetched successfully',
+      data: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone
       }
-
-      async function getMe(token) {
-        try {
-            const decoded = jwt.verify(token.replace('Bearer ', ''), 'bazmaSecretKey');
-            const userdata = {
-                id: decoded.id,
-                username: decoded.username,
-                email: decoded.email
-            };
-    
-            return { success: true, message: 'User data retrieved', data: userdata };
-        } catch (error) {
-            throw new Error('Invalid token');
-        }
     }
-    
-    module.exports = {registerUser,loginUser,getMe}
+  }
+  catch (error) {
+    throw new Error(error);
+  }
+}
 
+// logout
+
+async function logoutUser(token) {
+  try {
+    const decoded = jwt.verify(token, 'bazmaSecretKey');
+    jwt.sign({ id: decoded.id }, 'bazmaSecretKey', {
+      expiresIn: '7d'
+    });
+
+    return { success: true, message: 'Logout successful' };
+
+  }
+  catch (error) {
+    throw new Error(error);
+  }
+}
+
+module.exports = { registerUser, loginUser, getMe, logoutUser }

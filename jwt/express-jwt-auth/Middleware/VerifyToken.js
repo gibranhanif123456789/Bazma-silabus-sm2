@@ -16,7 +16,8 @@ const VerifyToken = (req, res, next) => {
                 message: "Invalid Token"
             });
         }
-        next(); 
+        req.user = decoded;
+        return next(); 
     });
 };
 
